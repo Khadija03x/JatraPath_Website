@@ -5,7 +5,6 @@ function App() {
 
   return (
     <>
-      <p><strong>JatraPath</strong></p>
       <Home />
     </>
   )

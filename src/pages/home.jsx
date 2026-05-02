@@ -1,10 +1,18 @@
+import Layout from "../components/layout.jsx";
+import "./../styles/pages/Home.css";
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <p>This is a simple home page component.</p>
-      <a href="/JatraPath_Website/JatraPath_V0.1/old.html">Go to First version of JatraPath</a>
-    </div>
+    <>
+      <div className="background">
+      <div className="circle1"></div>
+      <div className="circle2"></div>
+        <Layout>
+          <div className="content">
+            <h1>Welcome to the Home Page</h1>
+          </div>
+        </Layout>
+      </div>
+    </>
   );
 };
 
