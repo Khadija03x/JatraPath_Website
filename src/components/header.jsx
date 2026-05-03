@@ -38,8 +38,8 @@ const Header = () => {
         <a href="/login" className="login">Login</a>
         <button
           className={`hamburger${menuOpen ? " open" : ""}`}
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          onClick={() => setMenuOpen(prev => !prev)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
         >
           <span /><span /><span />
         </button>
@@ -55,10 +55,10 @@ const Header = () => {
               className="mobile-toggle"
               onClick={() => setServicesOpen(!servicesOpen)}
             >
-              Services {servicesOpen ? "∧" : "›"}
+              Services +
             </button>
 
-            <ul className={`mobile-sub${servicesOpen ? "" : " collapsed"}`}>
+            <ul className={`mobile-sub${servicesOpen ? " open" : " collapsed"}`}>
               <li><a href="/gift-cards">Gift Cards</a></li>
               <li><a href="/safety-info">Safety Info</a></li>
             </ul>
@@ -69,20 +69,23 @@ const Header = () => {
               className="mobile-toggle"
               onClick={() => setMoreOpen(!moreOpen)}
             >
-              More {moreOpen ? "∧" : "›"}
+              More +
             </button>
 
-            <ul className={`mobile-sub${moreOpen ? "" : " collapsed"}`}>
+            <ul className={`mobile-sub${moreOpen ? " open" : " collapsed"}`}>
               <li><a href="/blog">Blog</a></li>
               <li><a href="/contact">Contact</a></li>
               <li><a href="/faq">FAQ</a></li>
               <li><a href="/terms">Terms of Service</a></li>
               <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/JatraPath_Website/JatraPath_V0.1/old.html">V0.1</a></li>
             </ul>
           </li>
         </ul>
 
         <a href="/login" className="mobile-login">Login</a>
+        
+        <div className="circle1"></div>
       </div>
     </header>
   );

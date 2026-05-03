@@ -19,6 +19,7 @@
     top: -250px;
     border-radius: 50%;
     filter: blur(400px);
+    z-index: -1;
     background-color: rgb(241, 134, 39);
 }
 .circle2{
@@ -30,7 +31,10 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     filter: blur(400px);
-    background-color: hsl(28 88% 55%);
+    background-color: rgb(241, 134, 39);
+}
+.content {
+    color: red;
 }
 @media (max-width: 600px) {
     .background {
