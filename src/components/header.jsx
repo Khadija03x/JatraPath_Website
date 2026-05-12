@@ -288,8 +288,6 @@ const Header = () => {
         <NavLink to="/login" className="mobile-login">
           Login
         </NavLink>
-
-        <div className="circle1"></div>
       </div>
     </header>
   );
