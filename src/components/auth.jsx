@@ -10,8 +10,8 @@ const Auth = () => {
     const form = new FormData(e.target);
 
     const url = isLogin
-      ? "http://localhost/Project-JatraPath/backend/controllers/login.php"
-      : "http://localhost/Project-JatraPath/backend/controllers/register.php";
+      ? "http://localhost/JatraPath_Website/backend/controllers/login.php"
+      : "http://localhost/JatraPath_Website/backend/controllers/register.php";
 
     try {
       const res = await fetch(url, {
