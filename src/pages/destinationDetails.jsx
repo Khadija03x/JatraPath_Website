@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 
 import Layout from "../components/layout";
 import { destinations } from "../data/destinationsData";
@@ -53,11 +53,12 @@ const DestinationDetails = () => {
               <span>{place.price}</span>
             </div>
 
-            <button
+            <NavLink
               className="cart-btn"
+              to="/login"
             >
               Add To Cart
-            </button>
+            </NavLink>
 
           </div>
 

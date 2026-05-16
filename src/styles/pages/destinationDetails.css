@@ -99,10 +99,10 @@
   font-weight:600;
 
   cursor:pointer;
+  text-decoration: none;
 
   transition:.3s;
 }
-
 .cart-btn:hover{
   background:#008f67;
 }
