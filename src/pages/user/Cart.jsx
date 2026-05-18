@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "../../styles/pages/user/Cart.css";
 
 const Cart = () => {
-
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,14 +9,12 @@ const Cart = () => {
      FETCH CART
   ========================= */
   const fetchCart = async () => {
-
     try {
-
       const res = await fetch(
         "http://localhost/JatraPath_Website/backend/api/cart.php",
         {
           credentials: "include",
-        }
+        },
       );
 
       const data = await res.json();
@@ -25,13 +22,9 @@ const Cart = () => {
       console.log("CART DATA:", data);
 
       setCartItems(data.cart || []);
-
     } catch (error) {
-
       console.log("Fetch Cart Error:", error);
-
     } finally {
-
       setLoading(false);
     }
   };
@@ -44,11 +37,9 @@ const Cart = () => {
      UPDATE PERSONS
   ========================= */
   const updatePersons = async (id, newCount) => {
-
     if (newCount < 1) return;
 
     try {
-
       const formData = new FormData();
 
       formData.append("id", id);
@@ -60,7 +51,7 @@ const Cart = () => {
           method: "POST",
           credentials: "include",
           body: formData,
-        }
+        },
       );
 
       const data = await res.json();
@@ -70,9 +61,7 @@ const Cart = () => {
       if (data.status === "success") {
         fetchCart();
       }
-
     } catch (error) {
-
       console.log("Update Error:", error);
     }
   };
@@ -81,15 +70,11 @@ const Cart = () => {
      DELETE ITEM
   ========================= */
   const removeItem = async (id) => {
-
-    const confirmDelete = window.confirm(
-      "Remove this item from cart?"
-    );
+    const confirmDelete = window.confirm("Remove this item from cart?");
 
     if (!confirmDelete) return;
 
     try {
-
       const formData = new FormData();
 
       formData.append("id", id);
@@ -100,7 +85,7 @@ const Cart = () => {
           method: "POST",
           credentials: "include",
           body: formData,
-        }
+        },
       );
 
       const data = await res.json();
@@ -110,9 +95,7 @@ const Cart = () => {
       if (data.status === "success") {
         fetchCart();
       }
-
     } catch (error) {
-
       console.log("Delete Error:", error);
     }
   };
@@ -121,9 +104,8 @@ const Cart = () => {
      TOTALS
   ========================= */
   const subtotal = cartItems.reduce(
-    (total, item) =>
-      total + Number(item.price) * Number(item.persons),
-    0
+    (total, item) => total + Number(item.price) * Number(item.persons),
+    0,
   );
 
   const serviceFee = 500;
@@ -134,7 +116,6 @@ const Cart = () => {
      LOADING
   ========================= */
   if (loading) {
-
     return (
       <div className="cart-page">
         <h2>Loading cart...</h2>
@@ -143,128 +124,75 @@ const Cart = () => {
   }
 
   return (
-
     <div className="cart-page">
-
       {/* HEADER */}
       <div className="cart-header">
-
         <div>
           <h1>Your Travel Cart 🛒</h1>
 
-          <p>
-            Review your selected destinations and continue booking.
-          </p>
+          <p>Review your selected destinations and continue booking.</p>
         </div>
-
       </div>
 
       {/* EMPTY */}
       {cartItems.length === 0 ? (
-
         <div className="empty-cart">
           <h2>Your cart is empty</h2>
         </div>
-
       ) : (
-
         <div className="cart-layout">
-
           {/* LEFT */}
           <div className="cart-items">
-
             {cartItems.map((item) => (
-
-              <div
-                className="cart-card"
-                key={item.id}
-              >
-
-                <img
-                  src={item.image}
-                  alt={item.name}
-                />
+              <div className="cart-card" key={item.id}>
+                <img src={item.image} alt={item.name} />
 
                 <div className="cart-content">
-
                   {/* TOP */}
                   <div className="cart-top">
-
                     <div>
-
                       <h3>{item.name}</h3>
 
-                      <p>
-                        📍 {item.location}
-                      </p>
+                      <p>📍 {item.location}</p>
 
-                      <span>
-                        {item.days} Days Tour
-                      </span>
-
+                      <span>{item.days} Days Tour</span>
                     </div>
 
-<button
-  className="remove-btn"
-  onClick={() => removeItem(item.id)}
->
-  ✕
-</button>
-
+                    <button
+                      className="remove-btn"
+                      onClick={() => removeItem(item.id)}
+                    >
+                      ✕
+                    </button>
                   </div>
 
                   {/* BOTTOM */}
                   <div className="cart-bottom">
-
                     <div className="quantity-box">
-
                       <button
-                        onClick={() =>
-                          updatePersons(
-                            item.id,
-                            item.persons - 1
-                          )
-                        }
+                        onClick={() => updatePersons(item.id, item.persons - 1)}
                       >
                         -
                       </button>
 
-                      <span>
-                        {item.persons}
-                      </span>
+                      <span>{item.persons}</span>
 
                       <button
-                        onClick={() =>
-                          updatePersons(
-                            item.id,
-                            item.persons + 1
-                          )
-                        }
+                        onClick={() => updatePersons(item.id, item.persons + 1)}
                       >
                         +
                       </button>
-
                     </div>
 
-                    <h2>
-                      ৳
-                      {Number(item.price) *
-                        Number(item.persons)}
-                    </h2>
-
+                    <h2>৳{Number(item.price) * Number(item.persons)}</h2>
                   </div>
-
                 </div>
-
               </div>
-
             ))}
-
           </div>
 
           {/* RIGHT */}
           <div className="cart-summary">
-
             <h2>Booking Summary</h2>
 
             <div className="summary-row">
@@ -282,16 +210,10 @@ const Cart = () => {
               <span>৳{total}</span>
             </div>
 
-            <button className="checkout-btn">
-              Proceed to Checkout
-            </button>
-
+            <button className="checkout-btn">Proceed to Checkout</button>
           </div>
-
         </div>
-
       )}
-
     </div>
   );
 };
