@@ -159,12 +159,8 @@ const Cart = () => {
                     </div>
 
                     <button
-<<<<<<< HEAD
-                      onClick={() => removeItem(item.id)} className="button_cross"
-=======
                       className="remove-btn"
                       onClick={() => removeItem(item.id)}
->>>>>>> f3d49f40d7a4431fb86f831b2d342661a657b8a8
                     >
                       ✕
                     </button>
