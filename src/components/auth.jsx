@@ -22,7 +22,11 @@ const Auth = () => {
         body: form,
       });
 
-      const data = await res.json();
+      const text = await res.text();
+
+console.log(text);
+
+const data = JSON.parse(text);
 
       console.log("SERVER RESPONSE:", data);
 

@@ -1,59 +1,83 @@
 <?php
+session_start();
+
+/* =========================
+   CORS
+========================= */
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Content-Type: application/json");
 
-session_start();
+/* PREFLIGHT */
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
 
 include "../config/db.php";
 
-/* ---------------- CHECK LOGIN ---------------- */
+/* NOT LOGGED IN */
 if (!isset($_SESSION['user_id'])) {
+
     echo json_encode([
-        "status" => "unauthorized"
+        "status" => "not_logged_in"
     ]);
+
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
 
-/* ---------------- USER INFO ---------------- */
-$userSql = "SELECT id, name, email FROM users WHERE id = ?";
-$stmt = $conn->prepare($userSql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$user = $stmt->get_result()->fetch_assoc();
+/* USER */
+$userQuery = $conn->prepare(
+    "SELECT id, name, email
+     FROM users
+     WHERE id = ?"
+);
 
-/* ---------------- CART COUNT ---------------- */
-$cartSql = "SELECT COUNT(*) as total FROM cart WHERE user_id = ?";
-$stmt = $conn->prepare($cartSql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$cartCount = $stmt->get_result()->fetch_assoc();
+$userQuery->bind_param("i", $user_id);
+$userQuery->execute();
 
-/* ---------------- ORDERS COUNT ---------------- */
-$orderSql = "SELECT COUNT(*) as total FROM orders WHERE user_id = ?";
-$stmt = $conn->prepare($orderSql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$orderCount = $stmt->get_result()->fetch_assoc();
+$userResult = $userQuery->get_result();
+$user = $userResult->fetch_assoc();
 
-/* ---------------- GIFT CARD COUNT (OPTIONAL) ---------------- */
-$giftSql = "SELECT COUNT(*) as total FROM user_giftcards WHERE user_id = ?";
-$stmt = $conn->prepare($giftSql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$giftCount = $stmt->get_result()->fetch_assoc();
+/* CART COUNT */
+$cartQuery = $conn->prepare(
+    "SELECT COUNT(*) as total
+     FROM cart
+     WHERE user_id = ?"
+);
 
-/* ---------------- RESPONSE ---------------- */
+$cartQuery->bind_param("i", $user_id);
+$cartQuery->execute();
+
+$cartResult = $cartQuery->get_result();
+$cartData = $cartResult->fetch_assoc();
+
+/* ORDERS COUNT */
+$orderQuery = $conn->prepare(
+    "SELECT COUNT(*) as total
+     FROM orders_table
+     WHERE user_id = ?"
+);
+
+$orderQuery->bind_param("i", $user_id);
+$orderQuery->execute();
+
+$orderResult = $orderQuery->get_result();
+$orderData = $orderResult->fetch_assoc();
+
+/* RESPONSE */
 echo json_encode([
     "status" => "success",
+
     "user" => $user,
+
     "stats" => [
-        "cart_items" => $cartCount["total"] ?? 0,
-        "orders" => $orderCount["total"] ?? 0,
-        "giftcards" => $giftCount["total"] ?? 0
+        "orders" => $orderData['total'] ?? 0,
+        "cart_items" => $cartData['total'] ?? 0
     ]
 ]);
 ?>
