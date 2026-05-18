@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/pages/user/Profile.css";
 
@@ -6,12 +7,39 @@ const Profile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
 
+  const [stats, setStats] = useState({
+    orders: 0,
+    cart_items: 0,
+    gift_cards: 0,
+    saved_places: 0,
+  });
+
+  /* FETCH REAL DATA */
+  useEffect(() => {
+
+    fetch("http://localhost/JatraPath_Website/backend/api/overview.php", {
+      credentials: "include",
+    })
+      .then(res => res.json())
+      .then(data => {
+
+        if (data.status === "success") {
+          setStats(data.stats);
+        }
+
+      })
+      .catch(err => console.log("Profile stats error:", err));
+
+  }, []);
+
+  /* LOGOUT */
   const handleLogout = () => {
 
     localStorage.removeItem("user");
 
     window.location.href = "/";
   };
+
   return (
     <div className="profile-page">
 
@@ -39,26 +67,26 @@ const Profile = () => {
 
       </div>
 
-      {/* STATS */}
+      {/* STATS (NOW DYNAMIC) */}
       <div className="profile-stats">
 
         <div className="profile-stat-card">
-          <h3>12</h3>
+          <h3>{stats.orders}</h3>
           <p>Total Trips</p>
         </div>
 
         <div className="profile-stat-card">
-          <h3>5</h3>
+          <h3>{stats.cart_items}</h3>
           <p>Cart Items</p>
         </div>
 
         <div className="profile-stat-card">
-          <h3>3</h3>
+          <h3>{stats.gift_cards}</h3>
           <p>Gift Cards</p>
         </div>
 
         <div className="profile-stat-card">
-          <h3>18</h3>
+          <h3>{stats.saved_places}</h3>
           <p>Saved Places</p>
         </div>
 
@@ -74,29 +102,17 @@ const Profile = () => {
 
           <div className="profile-field">
             <label>Full Name</label>
-            <input
-              type="text"
-              value={user?.name || ""}
-              readOnly
-            />
+            <input type="text" value={user?.name || ""} readOnly />
           </div>
 
           <div className="profile-field">
             <label>Email Address</label>
-            <input
-              type="email"
-              value={user?.email || ""}
-              readOnly
-            />
+            <input type="email" value={user?.email || ""} readOnly />
           </div>
 
           <div className="profile-field">
             <label>Account Type</label>
-            <input
-              type="text"
-              value="Traveler Account"
-              readOnly
-            />
+            <input type="text" value="Traveler Account" readOnly />
           </div>
 
         </div>
@@ -126,10 +142,7 @@ const Profile = () => {
 
           </div>
 
-          <button
-            onClick={handleLogout}
-            className="logout-btn"
-          >
+          <button onClick={handleLogout} className="logout-btn">
             Logout
           </button>
 

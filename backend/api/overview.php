@@ -1,6 +1,8 @@
 <?php
 session_start();
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 /* =========================
    CORS
 ========================= */
@@ -49,7 +51,7 @@ $user = $userResult->fetch_assoc();
 
 /* =========================
    CART COUNT
-========================= */
+========================= */        
 $cartQuery = $conn->prepare(
     "SELECT COUNT(*) AS total
      FROM cart
@@ -69,7 +71,7 @@ $cartData = $cartResult->fetch_assoc();
 ========================= */
 $orderQuery = $conn->prepare(
     "SELECT COUNT(*) AS total
-     FROM orders_table
+     FROM orders
      WHERE user_id = ?"
 );
 
