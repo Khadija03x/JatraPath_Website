@@ -262,11 +262,13 @@
   padding: 20px;
   border-radius: 12px;
   font-weight: 600;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 /* POPULAR */
 .popular-grid {
   display: grid;
+  padding-top: 50px;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
 }

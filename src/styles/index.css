@@ -1,16 +1,19 @@
 /* Ensure the root containers allow full height */
-html, body, #root {
-    height: 100%;
-    margin: 0;
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
   font-family: "DM Sans", sans-serif;
 }
 
 .layout-wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Takes up at least the full screen height */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Takes up at least the full screen height */
 }
 
 .main-content {
-    flex: 1; /* This expands to fill all empty space, pushing the footer to the bottom */
+  flex: 1; /* This expands to fill all empty space, pushing the footer to the bottom */
 }

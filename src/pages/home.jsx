@@ -164,7 +164,7 @@ const Home = () => {
           </div>
         </section>
         <section className="section testimonials">
-          <h2>What Travelers Say</h2>
+          <h2>What Travelers Say</h2><br />
 
           <div className="testimonial-box">
             <p>"JatraPath helped me explore Bangladesh like never before!"</p>
