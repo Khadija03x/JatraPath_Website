@@ -3,7 +3,7 @@ import AdminLayout from "./AdminLayout";
 
 const AdminOrders = () => {
   return (
-    <AdminLayout>
+    <AdminLayout activeTab="orders">
       <div>
         <h2>Admin Orders</h2>
         <p>This is the admin orders page.</p>

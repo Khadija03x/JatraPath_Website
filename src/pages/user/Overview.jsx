@@ -176,7 +176,9 @@ const Overview = () => {
 
           <h4>Gift Cards</h4>
 
-          <h2>3</h2>
+          <h2>
+            {data?.stats?.giftcards || 0}
+          </h2>
 
           <p>Available for use</p>
 
@@ -186,7 +188,7 @@ const Overview = () => {
 
           <h4>Saved Places</h4>
 
-          <h2>18</h2>
+          <h2>NOT SET</h2>
 
           <p>Favorite destinations</p>
 
@@ -266,37 +268,9 @@ const Overview = () => {
 
             <div>
 
-              <h4>Booking Confirmed</h4>
+              <h4>Booking Confirmed (NOT SET)</h4>
 
-              <p>Cox's Bazar Tour Package</p>
-
-            </div>
-
-          </div>
-
-          <div className="activity-item">
-
-            <span>🎁</span>
-
-            <div>
-
-              <h4>Gift Card Purchased</h4>
-
-              <p>৳5000 Travel Gift Card</p>
-
-            </div>
-
-          </div>
-
-          <div className="activity-item">
-
-            <span>🛒</span>
-
-            <div>
-
-              <h4>Added to Cart</h4>
-
-              <p>Sylhet Adventure Tour</p>
+              <p>NOT SET</p>
 
             </div>
 

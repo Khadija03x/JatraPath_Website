@@ -20,7 +20,7 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <AdminLayout>
+    <AdminLayout activeTab="dashboard">
       <div className="admin-container">
       {/* MAIN */}
       <div className="admin-main">

@@ -1,0 +1,158 @@
+/* =========================
+   Global
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Dashboard Layout
+========================= */
+
+.dashboard-container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+/* =========================
+   Sidebar
+========================= */
+
+.sidebar {
+  width: 260px;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+  z-index: 1000;
+}
+
+.sidebar h2 {
+  margin-bottom: 30px;
+  color: #00A779;
+}
+
+.sidebar button {
+  background: transparent;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.sidebar button:hover {
+  background: #1e293b;
+}
+
+/* ACTIVE BUTTON */
+
+.sidebar button.active {
+  background: #1e293b;
+  color: #00A779;
+}
+
+/* =========================
+   Main Content
+========================= */
+
+.main-content {
+  flex: 1;
+  padding: 25px;
+  background: #f4f6f9;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================
+   Hamburger Button
+========================= */
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #0f172a;
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* =========================
+   Overlay
+========================= */
+
+.overlay {
+  display: none;
+}
+
+.overlay.active {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+/* =========================
+   Tablet Responsive
+========================= */
+
+@media (max-width: 992px) {
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .main-content {
+    padding: 20px;
+  }
+}
+
+/* =========================
+   Mobile Responsive
+========================= */
+
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    transform: translateX(-100%);
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    width: 100%;
+    padding: 80px 15px 15px;
+  }
+}

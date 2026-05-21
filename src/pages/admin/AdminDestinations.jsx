@@ -130,7 +130,7 @@ const AdminDestinations = () => {
      UI
   ========================= */
   return (
-    <AdminLayout>
+    <AdminLayout activeTab="destinations">
     <div className="admin-destinations">
 
       <div className="admin-page-header">

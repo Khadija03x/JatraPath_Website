@@ -1,7 +1,7 @@
 import AdminLayout from "./AdminLayout";
 const AdminUsers = () => {
   return (
-    <AdminLayout>
+    <AdminLayout activeTab="users">
       <div>
         <h2>Admin Users</h2>
         <p>This is the admin users page.</p>

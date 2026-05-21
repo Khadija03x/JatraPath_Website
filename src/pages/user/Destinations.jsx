@@ -86,7 +86,7 @@ const Destinations = () => {
               <div className="destination-actions">
 
                 <button className="view-btn">
-                  View Details
+                  View Details (working..)
                 </button>
 
                 <button

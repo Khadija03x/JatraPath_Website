@@ -1,102 +1,70 @@
 <?php
-session_start();
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-/* =========================
-   CORS
-========================= */
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: GET, OPTIONS");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Content-Type: application/json");
 
-/* PREFLIGHT */
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
 }
 
+session_start();
 include "../config/db.php";
 
-/* NOT LOGGED IN */
+/* CHECK LOGIN */
 if (!isset($_SESSION['user_id'])) {
-
-    echo json_encode([
-        "status" => "not_logged_in"
-    ]);
-
+    echo json_encode(["status" => "unauthorized"]);
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
 
-/* =========================
-   USER INFO
-========================= */
-$userQuery = $conn->prepare(
-    "SELECT id, name, email
-     FROM users
-     WHERE id = ?"
-);
+/* ADMIN INFO */
+$stmt = $conn->prepare("SELECT id, name, email FROM users WHERE id = ?");
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$admin = $stmt->get_result()->fetch_assoc();
 
-$userQuery->bind_param("i", $user_id);
+/* TOTAL USERS (EXCLUDE ADMIN) */
+$userSql = "SELECT COUNT(*) as total FROM users WHERE role = 'user'";
+$userCount = $conn->query($userSql)->fetch_assoc();
 
-$userQuery->execute();
+/* DESTINATIONS */
+$destSql = "SELECT COUNT(*) as total FROM destinations";
+$destCount = $conn->query($destSql)->fetch_assoc();
 
-$userResult = $userQuery->get_result();
+/* ORDERS */
+$orderSql = "SELECT COUNT(*) as total FROM orders WHERE user_id = $user_id";
+$orderCount = $conn->query($orderSql)->fetch_assoc();
 
-$user = $userResult->fetch_assoc();
+/* CART ITEMS */
+$cartSql = "SELECT COUNT(*) as total FROM cart WHERE user_id = $user_id";
+$cartCount = $conn->query($cartSql)->fetch_assoc();
 
-/* =========================
-   CART COUNT
-========================= */        
-$cartQuery = $conn->prepare(
-    "SELECT COUNT(*) AS total
-     FROM cart
-     WHERE user_id = ?"
-);
+/* 🎁 REAL GIFT CARDS */
+$giftSql = "
+SELECT COUNT(*) as total
+FROM user_giftcards
+WHERE user_id = ?
+";
 
-$cartQuery->bind_param("i", $user_id);
+$stmt = $conn->prepare($giftSql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$giftCount = $stmt->get_result()->fetch_assoc();
 
-$cartQuery->execute();
-
-$cartResult = $cartQuery->get_result();
-
-$cartData = $cartResult->fetch_assoc();
-
-/* =========================
-   ORDERS COUNT
-========================= */
-$orderQuery = $conn->prepare(
-    "SELECT COUNT(*) AS total
-     FROM orders
-     WHERE user_id = ?"
-);
-
-$orderQuery->bind_param("i", $user_id);
-
-$orderQuery->execute();
-
-$orderResult = $orderQuery->get_result();
-
-$orderData = $orderResult->fetch_assoc();
-
-/* =========================
-   RESPONSE
-========================= */
+/* RESPONSE */
 echo json_encode([
-
     "status" => "success",
-
-    "user" => $user,
-
+    "user" => $admin,
     "stats" => [
-
-        "orders" => (int)($orderData['total'] ?? 0),
-
-        "cart_items" => (int)($cartData['total'] ?? 0)
+        "users" => (int)$userCount['total'],
+        "destinations" => (int)$destCount['total'],
+        "orders" => (int)$orderCount['total'],
+        "cart_items" => (int)$cartCount['total'],
+        "giftcards" => (int)$giftCount['total']
     ]
 ]);
 ?>

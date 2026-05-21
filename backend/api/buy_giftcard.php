@@ -16,37 +16,45 @@ include "../config/db.php";
 
 /* CHECK LOGIN */
 if (!isset($_SESSION['user_id'])) {
-
     echo json_encode([
         "status" => "error",
         "message" => "User not logged in"
     ]);
-
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
 
 $title = $_POST['title'] ?? '';
-$price = $_POST['price'] ?? 0;
+$price = (int)($_POST['price'] ?? 0);
 $category = $_POST['category'] ?? '';
 
-/* INSERT ORDER */
-$sql = "INSERT INTO giftcard_orders
-(user_id, title, category, price)
-VALUES (?, ?, ?, ?)";
+if (!$title || !$price || !$category) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Missing fields"
+    ]);
+    exit();
+}
+
+/* 1. INSERT ORDER */
+$sql = "INSERT INTO giftcard_orders (user_id, title, category, price)
+        VALUES (?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
-
-$stmt->bind_param(
-    "issi",
-    $user_id,
-    $title,
-    $category,
-    $price
-);
+$stmt->bind_param("issi", $user_id, $title, $category, $price);
 
 if ($stmt->execute()) {
+
+    /* 2. ADD TO USER WALLET (IMPORTANT FIX) */
+    $giftcard_id = $stmt->insert_id;
+
+    $sql2 = "INSERT INTO user_giftcards (user_id, giftcard_id)
+             VALUES (?, ?)";
+
+    $stmt2 = $conn->prepare($sql2);
+    $stmt2->bind_param("ii", $user_id, $giftcard_id);
+    $stmt2->execute();
 
     echo json_encode([
         "status" => "success"

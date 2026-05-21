@@ -39,20 +39,19 @@
 ========================= */
 
 .order-card {
-  background: rgba(255,255,255,0.75);
-
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
   border-radius: 22px;
 
   overflow: hidden;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .order-card:hover {
@@ -65,12 +64,20 @@
 
 .order-image {
   position: relative;
+  background: #e2e8f0;
 }
 
 .order-image img {
   width: 100%;
   height: 280px;
   object-fit: cover;
+  display: block;
+}
+
+/* fallback when no image */
+.order-image img[src=""],
+.order-image img:not([src]) {
+  display: none;
 }
 
 /* =========================
@@ -115,7 +122,8 @@
 .order-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  gap: 15px;
 
   margin-bottom: 25px;
 }
@@ -138,6 +146,7 @@
 
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 /* =========================
@@ -146,7 +155,7 @@
 
 .order-details {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
 
   margin-bottom: 30px;
@@ -177,6 +186,7 @@
 .order-actions {
   display: flex;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .details-btn,
@@ -192,7 +202,7 @@
   font-size: 15px;
   font-weight: 600;
 
-  transition: 0.3s;
+  transition: 0.3s ease;
 }
 
 .details-btn {
@@ -214,7 +224,7 @@
 }
 
 /* =========================
-   EMPTY
+   EMPTY STATE
 ========================= */
 
 .empty-orders {
@@ -226,7 +236,7 @@
 
   border-radius: 20px;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
 .empty-orders h2 {
@@ -243,7 +253,6 @@
 ========================= */
 
 @media (max-width: 992px) {
-
   .order-details {
     grid-template-columns: 1fr;
   }
@@ -254,7 +263,6 @@
 }
 
 @media (max-width: 600px) {
-
   .orders-header h1 {
     font-size: 1.8rem;
   }
@@ -262,7 +270,6 @@
   .order-top {
     flex-direction: column;
     align-items: flex-start;
-    gap: 15px;
   }
 
   .order-content {

@@ -122,7 +122,33 @@ const Cart = () => {
       </div>
     );
   }
+  /* =========================
+     CHECKOUT
+  ========================= */
+  const checkout = async () => {
+    try {
+      const res = await fetch(
+        "http://localhost/JatraPath_Website/backend/api/checkout.php",
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
 
+      const data = await res.json();
+
+      if (data.status === "success") {
+        alert("Order placed successfully!");
+        fetchCart(); // refresh cart (now empty)
+      } else if (data.status === "empty") {
+        alert("Cart is empty");
+      } else {
+        alert("Checkout failed");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div className="cart-page">
       {/* HEADER */}
@@ -210,7 +236,9 @@ const Cart = () => {
               <span>৳{total}</span>
             </div>
 
-            <button className="checkout-btn">Proceed to Checkout</button>
+            <button className="checkout-btn" onClick={checkout}>
+              Proceed to Checkout
+            </button>
           </div>
         </div>
       )}
