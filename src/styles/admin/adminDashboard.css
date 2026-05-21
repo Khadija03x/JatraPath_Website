@@ -79,23 +79,6 @@
   color: #0f172a;
 }
 
-/* ================= LOGOUT ================= */
-.logout-btn {
-  background: #ef4444;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
-}
-
-.logout-btn:hover {
-  background: #dc2626;
-  transform: scale(1.05);
-}
-
 /* ================= STATS ================= */
 .stats-grid {
   display: grid;
@@ -182,9 +165,5 @@ th {
     flex-direction: column;
     gap: 10px;
     text-align: center;
-  }
-
-  .logout-btn {
-    width: 100%;
   }
 }

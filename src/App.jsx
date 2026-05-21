@@ -21,7 +21,12 @@ import DestinationDetails from "./pages/destinationDetails.jsx";
 import Cart from "./pages/user/Cart.jsx";
 
 import ScrollToTop from "./components/ScrollToTop";
+// admin
 import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import AdminDestinations from "./pages/admin/AdminDestinations";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminOrders from "./pages/admin/AdminOrders";
+import AdminSettings from "./pages/admin/AdminSettings";
 import "./styles/App.css";
 
 function App() {
@@ -76,6 +81,26 @@ function App() {
 
         {/* ADMIN DASHBOARD */}
         <Route path="/admin" element={<AdminDashboard />} />
+
+        <Route
+          path="/admin/destinations"
+          element={<AdminDestinations />}
+        />
+
+        <Route
+          path="/admin/users"
+          element={<AdminUsers />}
+        />
+
+        <Route
+          path="/admin/orders"
+          element={<AdminOrders />}
+        />
+
+        <Route
+          path="/admin/settings"
+          element={<AdminSettings />}
+        />
         {/* FALLBACK */}
         <Route path="*" element={<Home />} />
 

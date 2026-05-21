@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 import "../styles/components/auth.css";
 
 const Auth = () => {
@@ -108,6 +109,9 @@ const Auth = () => {
             {isLogin ? " Sign up" : " Login"}
           </span>
         </p>
+        <Link to="/" className="home-link">
+          ⬅ Back to Home
+        </Link>
 
       </div>
     </div>

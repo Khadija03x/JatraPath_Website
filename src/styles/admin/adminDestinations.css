@@ -1,0 +1,156 @@
+.admin-destinations {
+  padding: 20px;
+}
+
+.admin-page-header {
+  margin-bottom: 25px;
+}
+
+.admin-page-header h1 {
+  font-size: 32px;
+  color: #0f172a;
+}
+
+.admin-page-header p {
+  color: #64748b;
+  margin-top: 5px;
+}
+
+/* FORM */
+
+.destination-form {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.destination-form input,
+.destination-form textarea {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  font-size: 15px;
+}
+
+.destination-form textarea {
+  grid-column: span 2;
+  min-height: 120px;
+  resize: none;
+}
+
+.destination-form button {
+  grid-column: span 2;
+  padding: 14px;
+  border: none;
+  background: #0f172a;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.destination-form button:hover {
+  background: #1e293b;
+}
+
+/* GRID */
+
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* CARD */
+
+.destination-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+}
+
+.destination-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.destination-content {
+  padding: 15px;
+}
+
+.destination-content h3 {
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+.destination-content p {
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.destination-content span {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.destination-content small {
+  color: #94a3b8;
+}
+
+.delete-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+  .destination-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .destination-form {
+    grid-template-columns: 1fr;
+  }
+
+  .destination-form textarea,
+  .destination-form button {
+    grid-column: span 1;
+  }
+
+  .destination-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

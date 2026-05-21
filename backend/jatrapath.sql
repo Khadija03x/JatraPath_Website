@@ -1,12 +1,6 @@
--- phpMyAdmin SQL Dump
--- Generation Time: May 21, 2026 at 03:12 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
 
 --
 -- Database: `jatrapath`
@@ -38,20 +32,21 @@ CREATE TABLE `destinations` (
   `location` varchar(100) DEFAULT NULL,
   `image` text DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
-  `days` int(11) DEFAULT NULL
+  `days` int(11) DEFAULT NULL,
+  `description` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `destinations`
 --
 
-INSERT INTO `destinations` (`id`, `name`, `location`, `image`, `price`, `days`) VALUES
-(1, 'Sajek Valley Cloud Tour', 'Rangamati', 'https://i.pinimg.com/1200x/f5/d8/f3/f5d8f30b2a7eaf03604840c280e8401e.jpg', 4500, 3),
-(2, 'Cox’s Bazar Beach Escape', 'Chattogram', 'https://i.pinimg.com/736x/af/92/61/af92611e33b7fde9ced5d7e764be0371.jpg', 6500, 4),
-(3, 'Sylhet Tea Garden Experience', 'Sylhet', 'https://i.pinimg.com/736x/dc/b1/45/dcb145ea3bb2d5dca1bc7c0abdeb5178.jpg', 5200, 3),
-(4, 'Bandarban Hill Adventure', 'Bandarban', 'https://i.pinimg.com/736x/2f/e0/d7/2fe0d70ae2737f1f2e9f6ec00e0ddbad.jpg', 7000, 5),
-(5, 'Sundarbans Mangrove Safari', 'Khulna', 'https://i.pinimg.com/736x/0c/59/57/0c5957a5273fe8b793397bcf375475b5.jpg', 5800, 4),
-(6, 'Saint Martin Island Trip', 'Cox’s Bazar', 'https://i.pinimg.com/736x/f0/e3/29/f0e329c502eb0e24a77712493f8b6aec.jpg', 8000, 3);
+INSERT INTO `destinations` (`id`, `name`, `location`, `image`, `price`, `days`, `description`) VALUES
+(1, 'Sajek Valley Cloud Tour', 'Rangamati', 'https://i.pinimg.com/1200x/f5/d8/f3/f5d8f30b2a7eaf03604840c280e8401e.jpg', 4500, 3, NULL),
+(2, 'Cox’s Bazar Beach Escape', 'Chattogram', 'https://i.pinimg.com/736x/af/92/61/af92611e33b7fde9ced5d7e764be0371.jpg', 6500, 4, NULL),
+(3, 'Sylhet Tea Garden Experience', 'Sylhet', 'https://i.pinimg.com/736x/dc/b1/45/dcb145ea3bb2d5dca1bc7c0abdeb5178.jpg', 5200, 3, NULL),
+(4, 'Bandarban Hill Adventure', 'Bandarban', 'https://i.pinimg.com/736x/2f/e0/d7/2fe0d70ae2737f1f2e9f6ec00e0ddbad.jpg', 7000, 5, NULL),
+(5, 'Sundarbans Mangrove Safari', 'Khulna', 'https://i.pinimg.com/736x/0c/59/57/0c5957a5273fe8b793397bcf375475b5.jpg', 5800, 4, NULL),
+(6, 'Saint Martin Island Trip', 'Cox’s Bazar', 'https://i.pinimg.com/736x/f0/e3/29/f0e329c502eb0e24a77712493f8b6aec.jpg', 8000, 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -67,15 +62,6 @@ CREATE TABLE `giftcard_orders` (
   `price` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `giftcard_orders`
---
-
-INSERT INTO `giftcard_orders` (`id`, `user_id`, `title`, `category`, `price`, `created_at`) VALUES
-(1, 32, 'Birthday Special', 'Birthday', 5000, '2026-05-18 18:17:43'),
-(2, 32, 'Eid Mubarak', 'Festival', 10000, '2026-05-18 18:39:30'),
-(3, 32, 'Eid Mubarak', 'Festival', 10000, '2026-05-18 18:39:33');
 
 -- --------------------------------------------------------
 
@@ -105,6 +91,7 @@ CREATE TABLE `users` (
   `role` varchar(20) DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `user_giftcards`
@@ -165,13 +152,13 @@ ALTER TABLE `user_giftcards`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `destinations`
 --
 ALTER TABLE `destinations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `giftcard_orders`
@@ -189,7 +176,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `user_giftcards`

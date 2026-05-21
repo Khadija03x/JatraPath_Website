@@ -1,0 +1,31 @@
+{/* DESTINATIONS */}
+        {activeTab === "destinations" && (
+          <div>
+            <h2>Manage Destinations</h2>
+            <p>Add / Edit / Delete destinations here</p>
+          </div>
+        )}
+
+        {/* USERS */}
+        {activeTab === "users" && (
+          <div>
+            <h2>User Management</h2>
+            <p>Manage all users here</p>
+          </div>
+        )}
+
+        {/* ORDERS */}
+        {activeTab === "orders" && (
+          <div>
+            <h2>Orders</h2>
+            <p>Track bookings here</p>
+          </div>
+        )}
+
+        {/* SETTINGS */}
+        {activeTab === "settings" && (
+          <div>
+            <h2>Settings</h2>
+            <p>System configuration</p>
+          </div>
+        )}

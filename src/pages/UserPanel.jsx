@@ -57,10 +57,9 @@ const UserDashboard = () => {
       </button>
 
       {/* Overlay */}
-      <div
-        className={`overlay ${sidebarOpen ? "active" : ""}`}
-        onClick={toggleMenu}
-      ></div>
+      {sidebarOpen && (
+        <div className="overlay active" onClick={toggleMenu}></div>
+      )}
 
       <div className="dashboard-container">
 
