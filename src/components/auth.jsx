@@ -21,7 +21,13 @@ const Auth = () => {
     try {
       const res = await fetch(url, {
         method: "POST",
-        body: form,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+          email: form.get("email"),
+          password: form.get("password"),
+        }),
       });
 
       const text = await res.text();
