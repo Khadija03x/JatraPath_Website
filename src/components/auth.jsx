@@ -12,14 +12,15 @@ const Auth = () => {
 
     const form = new FormData(e.target);
 
+    const BASE_URL = "https://jatrapath.kesug.com/backend/api";
+
     const url = isLogin
-      ? "http://localhost/JatraPath_Website/backend/controllers/login.php"
-      : "http://localhost/JatraPath_Website/backend/controllers/register.php";
+      ? `${BASE_URL}/login.php`
+      : `${BASE_URL}/register.php`;
 
     try {
       const res = await fetch(url, {
         method: "POST",
-        credentials: "include",
         body: form,
       });
 
