@@ -12,7 +12,7 @@ const Auth = () => {
 
     const form = new FormData(e.target);
 
-    const BASE_URL = "https://jatrapath.kesug.com/backend/api";
+    const BASE_URL = "https://jatrapath.kesug.com/backend/controllers";
 
     const url = isLogin
       ? `${BASE_URL}/login.php`
